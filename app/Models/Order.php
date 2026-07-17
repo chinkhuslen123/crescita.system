@@ -9,6 +9,7 @@ class Order extends Model
 
     protected $fillable = [
         'table_id',
+        'business_date',
         'start_time',
         'end_time',
         'status',
