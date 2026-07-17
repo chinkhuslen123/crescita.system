@@ -17,6 +17,6 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN npm install && npm run build
 
-RUN php artisan config:cache
+RUN npm install && npm run build
 
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
