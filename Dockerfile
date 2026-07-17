@@ -21,4 +21,4 @@ RUN chmod -R 775 storage bootstrap/cache
 
 RUN php artisan optimize:clear
 
-CMD php artisan migrate --force && php artisan optimize && php artisan serve --host=0.0.0.0 --port=$PORT
+CMD php artisan migrate --force && php artisan optimize:clear && php artisan serve --host=0.0.0.0 --port=$PORT
