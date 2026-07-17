@@ -588,12 +588,14 @@ class="action-btn">
 
 
 
-<a href="{{ route('dashboard') }}"
-class="action-btn cancel-btn">
+<form action="{{ route('orders.cancel', $order) }}" method="POST" style="display:inline;">
+    @csrf
 
-← Буцах
+    <button type="submit" class="action-btn cancel-btn">
+        ← Буцах
+    </button>
 
-</a>
+</form>
 
 
 
