@@ -10,15 +10,14 @@ class ReportController extends Controller
 {
     public function history(Request $request)
 {
-    $date = $request->date ?? DailyClosing::currentBusinessDate();
-
     $orders = Order::with('table')
         ->whereNotNull('payment_type')
-        ->where('business_date', $date)
         ->orderBy('end_time', 'desc')
         ->get();
 
     $total = $orders->sum('total_price');
+
+    $date = $request->date ?? now()->format('Y-m-d');
 
     $closing = DailyClosing::where('date', $date)->first();
 
