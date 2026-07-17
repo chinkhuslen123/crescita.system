@@ -38,7 +38,7 @@ Route::get('/dashboard', function () {
     );
 
 })
-->middleware(['auth', 'verified'])
+->middleware(['auth'])
 ->name('dashboard');
 
 
