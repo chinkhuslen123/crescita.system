@@ -629,52 +629,38 @@ public function removeItem(OrderItem $item)
      * Өдрийн борлуулалтын тайлан
      */
     public function dailyReport()
-    {
+{
+    $orders = Order::where(
+        'status',
+        'closed'
+    )
+    ->with(
+        'items.product'
+    )
+    ->orderBy(
+        'end_time',
+        'desc'
+    )
+    ->get();
 
 
-        $orders = Order::where(
-            'status',
-            'closed'
+    $totalSales = $orders->sum(
+        'total_price'
+    );
+
+
+    $totalOrders = $orders->count();
+
+
+    return view(
+        'reports.daily',
+        compact(
+            'orders',
+            'totalSales',
+            'totalOrders'
         )
-
-        ->whereDate(
-            'end_time',
-            today()
-        )
-
-        ->with(
-            'items.product'
-        )
-
-        ->get();
-
-
-
-
-
-        $totalSales = $orders->sum(
-            'total_price'
-        );
-
-
-
-        $totalOrders = $orders->count();
-
-
-
-
-
-        return view(
-            'reports.daily',
-            compact(
-                'orders',
-                'totalSales',
-                'totalOrders'
-            )
-        );
-
-
-    }
+    );
+}
     public function finish(Order $order)
 {
 
